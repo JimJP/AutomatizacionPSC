@@ -1,0 +1,16 @@
+========= GENERACIÓN DE REPORTES ==========
+1. Ubicar en el proyecto el archivo con nombre extent.properties src\test\resources\extent.properties
+2. Completar el archivo properties con todos los parámetros actuales y guardar
+3. Por ultimo en el pom.xml agregar la libreria del reporte https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter
+4. Como paso final ejecutar la clase Runner donde la sección del plugin debe contener "pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "json:target/cucumber-reports.json"}
+5. Una vez ejecutado el Runner se va generar un archivo html la carpeta test-output C:\AutomationPSC\test-output y en caso que no se genere esa carpeta hay que crearlo manualmente y volver a ejecutar el Runner
+
+========= SUBIR POR PRIMERA VEZ PROYECTO A GIT ==========
+1. En el menú VCS en la barra de menú seleccionar Enable Version Control Integration > Elegir GIT > dar OK
+2. Se debe sombrear todas las clases y archivos de color rojo del proyecto (el proyecto está bajo control de versiones, y un repositorio Git ha sido inicializado)
+3. Ejecutar el comando: git add .   (el punto quiere decir que aplica a todos los archivos del pry)
+4. Ejecutar el comando: git commit -m "mensaje del commit"
+5. En GitHub crear un nuevo repositorio en caso no se cuente con uno.
+6. Ejecutar el comando: git remote add origin https://github.com/JimJP/AutomatizacionPSC.git   (sirve para conectar el proyecto con mi cuenta de GitHub)
+7. Ejecutar el comando: git branch -M main
+7. Ejecutar el comando: git push -u origin master  (sirve para subir todos los cambios a mi cuenta de GitHub)
