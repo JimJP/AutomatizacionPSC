@@ -40,8 +40,13 @@ public class LoginSteps extends BasePage {
     }
 
     @And("Selecciono el Rol Operador de Planeamiento Oci")
-    public void seleccionarRol() throws InterruptedException {
+    public void seleccionarRolOperadorOci() throws InterruptedException {
         selectRolPage.seleccionoElRolOperadorDePlaneamientoOci();
+    }
+
+    @And("Selecciono el rol Usuario de Planeamiento")
+    public void seleccionarRolUsuarioPlaneamiento(){
+        selectRolPage.seleccionoElRolUsuarioDePlaneamiento();
     }
 
     @Then("Se muestra la interfaz de PSC")

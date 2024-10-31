@@ -3,6 +3,7 @@ package pageObjects;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -304,6 +305,12 @@ public class BasePage {
         }
     }
 
+    public void waitForWebElementClickable(WebElement element) { //Espera que el Elemento sea clickeable con un maximo de 20 seg
+
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+    }
+
     public void waitForWebElementPresenceOfElementLocated(By locator) { //Espera hasta que un elemento esté presente en el DOM. No garantiza visibilidad y podría estar oculto
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -346,6 +353,31 @@ public class BasePage {
             System.err.println("Error inesperado al esperar que el elemento sea visible: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public WebElement waitForTextInWebElementVisibilityOfElementLocated(By locator, String codigoUO) { //Permite que el texto tenga coincidencia con el elemento de carga en el listbox
+        WebElement element = null;
+        try {
+            element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, codigoUO));
+
+        } catch (TimeoutException e) {
+            System.err.println("Error: El elemento no se hizo visible o no contenía el texto esperado en el tiempo establecido: " + locator.toString());
+            e.printStackTrace();
+
+        } catch (NoSuchElementException e) {
+            System.err.println("Error: No se pudo encontrar el elemento: " + locator.toString());
+            e.printStackTrace();
+
+        } catch (StaleElementReferenceException e) {
+            System.err.println("Error: El elemento ya no es válido en el DOM (Stale): " + locator.toString());
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            System.err.println("Error inesperado al esperar que el elemento sea visible: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return element;
     }
 
     public void waitForWebElementInvisibilityOfElementLocated(By locator) { //Espera hasta que un elemento no sea visible o haya sido eliminado del DOM (modal, alertas, etc)
@@ -485,6 +517,50 @@ public class BasePage {
             FileHandler.copy(srcFile, destFile);
             System.out.println("Captura de pantalla guardada en: " + destFile.getAbsolutePath());
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public WebElement getEditButton(String xpathPattern, String valorDinamico){ // Método para encontrar un elemento según un XPath dinámico y un valor dinamico para insertar
+        try {
+            String xpathCompleto = String.format(xpathPattern, valorDinamico);
+            return driver.findElement(By.xpath(xpathCompleto));
+        } catch (NoSuchElementException e) {
+            System.err.println("Error: No se pudo encontrar el elemento con el XPath: " + xpathPattern);
+            e.printStackTrace();
+            return null; // Retornar null si no se encuentra el elemento
+        } catch (StaleElementReferenceException e) {
+            System.err.println("Error: El elemento ya no es válido en el DOM: " + xpathPattern);
+            e.printStackTrace();
+            return null; // Manejar cuando el elemento ya no es válido
+        } catch (ElementNotInteractableException e) {
+            System.err.println("Error: El elemento no es interactuable: " + xpathPattern);
+            e.printStackTrace();
+            return null; // Manejar cuando el elemento no es interactuable
+        } catch (Exception e) {
+            // Captura cualquier otra excepción inesperada
+            System.err.println("Error inesperado: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void clickJavaScript(WebElement element){ // Metodo para hacer click usando JavaScript sobre un WebElement
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            //return null;
+        } catch (NoSuchElementException e) {
+            System.err.println("Error: No se pudo encontrar el elemento para hacer clic con JavaScript: " + element);
+            e.printStackTrace(); // Retornar null si no se encuentra el elemento
+        } catch (StaleElementReferenceException e) {
+            System.err.println("Error: El elemento ya no es válido en el DOM para el uso de JavaScript: " + element);
+            e.printStackTrace(); // Manejar cuando el elemento ya no es válido
+        } catch (ElementNotInteractableException e) {
+            System.err.println("Error: El elemento no es interactuable para el uso de JavaScript: " + element);
+            e.printStackTrace(); // Manejar cuando el elemento no es interactuable
+        } catch (Exception e) {
+            // Captura cualquier otra excepción inesperada
+            System.err.println("Error inesperado para el uso de JavaScript: " + e.getMessage());
             e.printStackTrace();
         }
     }

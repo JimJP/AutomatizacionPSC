@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.CapacidadOperativaPage;
 
-public class ValidationCOPESteps{
+public class CapacidadOperativaSteps {
 
     CapacidadOperativaPage capacidadOperativaPage = new CapacidadOperativaPage();
 
