@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue = {"stepsDefinitions"},
         monochrome = true,
         plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "json:target/cucumber-reports.json"},
-        tags = "@COPE"
+        tags = "@FlujoAprobacionPOU"
 )
 
 public class Runner {

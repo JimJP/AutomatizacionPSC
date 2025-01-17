@@ -1,6 +1,7 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class CapacidadOperativaPage extends BasePage{
 
@@ -9,6 +10,7 @@ public class CapacidadOperativaPage extends BasePage{
     private final By capacidadOperativaMenu = By.xpath("//div[@class='dx-item dx-treeview-item'][contains(.,'Registrar Capacidad Operativa - OP OCI')]");
     private final By limpiarAmbitoIcon = By.xpath("(//span[contains(@class,'dx-icon dx-icon-clear')])[1]");
     private final By desplegarAmbitoComboBox = By.xpath("(//div[@class='dx-dropdowneditor-icon'])[1]");
+    private final By escribirNombreAmbitoTextBox = By.xpath("//dx-text-box[@placeholder='Buscar...']//input[@role='textbox']");
     private final By seleccionarAmbitoComboBox = By.xpath("//div[@class='dx-item-content dx-treeview-item-content'][contains(.,'PODER JUDICIAL')]");
     private final By buscarButton = By.xpath("//div[@class='dx-button-content'][contains(.,'Buscar')]");
     private final By divBuscarButton = By.cssSelector(".dx-overlay-wrapper.dx-loadpanel-wrapper.dx-overlay-shader");
@@ -25,7 +27,7 @@ public class CapacidadOperativaPage extends BasePage{
     private final By agregarCapacidadOperativaButton = By.xpath("//div[@class='dx-button-content'][contains(.,'Agregar Capacidad Operativa')]");
     private final By guardarCapacidadOperativaButton = By.xpath("//div[@class='dx-button-content'][contains(.,'Guardar Capacidad Operativa')]");
     private final By verDetalleValidacionModal = By.xpath("//div[@class='dx-template-wrapper dx-item-content dx-accordion-item-title'][contains(.,'Ver detalle')]");
-    private final By validarMensajeExcepcionModal = By.xpath("//li[contains(.,'listaPersonal[0]: El personal nro 40472538 se encuentra registrada en otro Órgano de Control (L352), debe solicitar que sea compartido.')]");
+    private final By validarMensajeExcepcionModal = By.xpath("//span[contains(.,'listaPersonal[0]: El personal nro 40472538 se encuentra registrada en otro Órgano de Control (L352), debe solicitar que sea compartido.')]");
 
     /*--- LOCALIZADORES FEATURE COPE_OCI CP0002  ---*/
     private final By validarMensajeNroDctoIncorrecto = By.xpath("//span[@class='message'][contains(.,'\"description\":[\"Ingrese número DNI valido\"]')]");
@@ -51,6 +53,11 @@ public class CapacidadOperativaPage extends BasePage{
         Thread.sleep(1000);
         click(desplegarAmbitoComboBox);
 
+        /* WebElement cajaTextoAmbito = findElement(escribirNombreAmbitoTextBox);
+        clickJavaScript(cajaTextoAmbito); */
+        Thread.sleep(1000);
+        click(escribirNombreAmbitoTextBox);
+        typeText(escribirNombreAmbitoTextBox, "poder");
 
         waitForWebElementVisibilityOfElementLocated(seleccionarAmbitoComboBox);
         click(seleccionarAmbitoComboBox);

@@ -109,15 +109,15 @@ public class BasePage {
             element.sendKeys(typeText);
 
         } catch (NoSuchElementException e) { // Maneja la excepción si el elemento no se encuentra
-            System.err.println("Error: No se pudo encontrar el elemento: " + locator.toString());
+            System.err.println("Error: No se pudo encontrar el elemento para escribir: " + locator.toString());
             e.printStackTrace();
 
         } catch (ElementNotInteractableException e) { // Maneja la excepción si el elemento no es interactuable
-            System.err.println("Error: No se puede interactuar con el elemento: " + locator.toString());
+            System.err.println("Error: No se puede interactuar con el elemento para escribir: " + locator.toString());
             e.printStackTrace();
 
         } catch (StaleElementReferenceException e) {
-            System.err.println("Error: El elemento ya no es válido en el DOM (Stale): " + locator.toString());
+            System.err.println("Error: El elemento para escribir ya no es válido en el DOM (Stale): " + locator.toString());
             e.printStackTrace();
 
         } catch (Exception e) { // Maneja cualquier otra excepción que pueda ocurrir
@@ -132,15 +132,15 @@ public class BasePage {
             element.click();
 
         } catch (NoSuchElementException e) { // Maneja la excepción si el elemento no se encuentra
-            System.err.println("Error: No se pudo encontrar el elemento: " + locator.toString());
+            System.err.println("Error: No se pudo encontrar el elemento para hacer click: " + locator.toString());
             e.printStackTrace();
 
         } catch (ElementNotInteractableException e) { // Maneja la excepción si el elemento no es interactuable
-            System.err.println("Error: No se puede interactuar con el elemento: " + locator.toString());
+            System.err.println("Error: No se puede interactuar con el elemento para hacer click: " + locator.toString());
             e.printStackTrace();
 
         } catch (StaleElementReferenceException e) {
-            System.err.println("Error: El elemento ya no es válido en el DOM (Stale): " + locator.toString());
+            System.err.println("Error: El elemento ya no es válido en el DOM (Stale) para hacer click: " + locator.toString());
             e.printStackTrace();
 
         } catch (Exception e) { // Maneja cualquier otra excepción que pueda ocurrir
@@ -296,7 +296,7 @@ public class BasePage {
             e.printStackTrace();
 
         } catch (StaleElementReferenceException e) {
-            System.err.println("Error: El elemento ya no es válido en el DOM (Stale): " + locator.toString());
+            System.err.println("Error: El elemento ya no es válido en el DOM (Stale) y no puede esperar que sea clickeable: " + locator.toString());
             e.printStackTrace();
 
         } catch (Exception e) {
@@ -316,11 +316,11 @@ public class BasePage {
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 
         } catch (TimeoutException e) {
-            System.err.println("Error: El elemento no apareció en el DOM en el tiempo esperado: " + locator.toString());
+            System.err.println("Error: El elemento no se hizo presente en el DOM en el tiempo esperado: " + locator.toString());
             e.printStackTrace();
 
         } catch (NoSuchElementException e) {
-            System.err.println("Error: No se pudo encontrar el elemento: " + locator.toString());
+            System.err.println("Error: No se pudo encontrar la presencia del elemento: " + locator.toString());
             e.printStackTrace();
 
         } catch (StaleElementReferenceException e) {
@@ -521,7 +521,7 @@ public class BasePage {
         }
     }
 
-    public WebElement getEditButton(String xpathPattern, String valorDinamico){ // Método para encontrar un elemento según un XPath dinámico y un valor dinamico para insertar
+    public WebElement getElementAndValueDinamic(String xpathPattern, String valorDinamico){ // Método para encontrar un elemento según un XPath dinámico y un valor dinamico para insertar
         try {
             String xpathCompleto = String.format(xpathPattern, valorDinamico);
             return driver.findElement(By.xpath(xpathCompleto));
@@ -562,6 +562,22 @@ public class BasePage {
             // Captura cualquier otra excepción inesperada
             System.err.println("Error inesperado para el uso de JavaScript: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método genérico para subir un archivo.
+     *
+     * @param locator El localizador del elemento input[type="file"]
+     * @param filePath La ruta absoluta del archivo a subir
+     */
+    public void uploadFile(By locator, String filePath) {
+        try {
+            WebElement inputFile = driver.findElement(locator);
+            inputFile.sendKeys(filePath);
+            System.out.println("Archivo subido correctamente: " + filePath);
+        } catch (Exception e) {
+            System.err.println("Error al intentar subir el archivo: " + e.getMessage());
         }
     }
 

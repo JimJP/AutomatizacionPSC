@@ -10,6 +10,7 @@ public class SelectRolPage extends BasePage{
     private final By rolesComboBox = By.xpath("//div[contains(@class,'dx-dropdowneditor-input-wrapper dx-selectbox-container')]");
     private final By selectRolOpeOciComboBox = By.xpath("//div[@class='dx-item-content dx-list-item-content'][contains(.,'OPERADOR DE PLANEAMIENTO OCI')]");
     private final By seleccionarRolUsuarioPlaneamientoComboBox = By.xpath("//div[@class='dx-item-content dx-list-item-content'][contains(.,'USUARIO DE PLANEAMIENTO')]");
+    private final By seleccionarRolUsuarioDePlaneamientoUo = By.xpath("//div[@class='dx-item-content dx-list-item-content'][contains(.,'OPERADOR DE PLANEAMIENTO UO')]");
     private final By cargaPaginaRolOverlay = By.xpath("//div[contains(@class,'dx-loadpanel-content-wrapper')]");
     private final By pscButton = By.xpath("//img[contains(@src,'PSC')]");
     private final By welcomeModuloPscLabel = By.xpath("//img[@class='img-icon']");
@@ -43,6 +44,16 @@ public class SelectRolPage extends BasePage{
         waitForWebElementVisibilityOfElementLocated(pscButton);
         waitForWebElementInvisibilityOfElementLocated(cargaPaginaRolOverlay);
         click(pscButton);
+    }
+
+    public void seleccionoElRolOperadorDePlaneamientoUo(){
+        waitForWebElementInvisibilityOfElementLocated(divComBoxRol);
+        click(rolesComboBox);
+        click(seleccionarRolUsuarioDePlaneamientoUo);
+        waitForWebElementVisibilityOfElementLocated(pscButton);
+        waitForWebElementInvisibilityOfElementLocated(cargaPaginaRolOverlay);
+        click(pscButton);
+
     }
 
     public void seMuestraLaInterfazDePsc(){

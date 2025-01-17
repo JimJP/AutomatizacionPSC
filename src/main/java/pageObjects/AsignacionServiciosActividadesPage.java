@@ -56,7 +56,7 @@ public class AsignacionServiciosActividadesPage extends BasePage {
         String xpathBtnEditar = "//tr[td[text()='%s']]/td/div/span/dx-button[@aria-label='edit']";
 
         waitForWebElementVisibilityOfElementLocated(welcomeAsignacionServiciosLabel);
-        WebElement btnEditar = getEditButton(xpathBtnEditar, valorDinamicoCelda);
+        WebElement btnEditar = getElementAndValueDinamic(xpathBtnEditar, valorDinamicoCelda);
         clickJavaScript(btnEditar);
     }
 

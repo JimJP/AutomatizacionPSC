@@ -17,6 +17,7 @@ public class LoginPage extends BasePage{
     public void elUsuarioIniciaSesion (){
         typeText(userNameInput, Constants_Variables.USER_DEV);
         typeText(passwordInput, Constants_Variables.USER_PASSWORD_DEV);
+        waitForWebElementClickable(loginButton);
         click(loginButton);
     }
 

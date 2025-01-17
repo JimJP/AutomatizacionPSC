@@ -49,6 +49,11 @@ public class LoginSteps extends BasePage {
         selectRolPage.seleccionoElRolUsuarioDePlaneamiento();
     }
 
+    @And("Selecciono el Rol Operador de Planeamiento Uo")
+    public void seleccionoElRolOperadorDePlaneamientoUo(){
+        selectRolPage.seleccionoElRolOperadorDePlaneamientoUo();
+    }
+
     @Then("Se muestra la interfaz de PSC")
     public void verificarIngresoPsc(){
         selectRolPage.seMuestraLaInterfazDePsc();
